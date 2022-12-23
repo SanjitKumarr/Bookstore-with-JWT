@@ -4,9 +4,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 let User = require('../models/users');
+const auth = require("../../middleware/auth");
 
 //adding User router
-userRoute.post("/register", async (req, res) => {
+userRoute.post("/register",async (req, res) => {
     try{
         const { firstName, lastName, email, password } = req.body;
         if (!(email && password && firstName && lastName)) {
@@ -30,13 +31,13 @@ userRoute.post("/register", async (req, res) => {
                 expiresIn: "2h",
             });
         user.token = token;
-        res.status(201).json(user);
+        res.status(201).json(user.token);
   } catch (err) {
         console.log(err);
   }
 });
 
-userRoute.post("/login", async (req, res) => {
+userRoute.post("/login",async (req, res) => {
     try {
         const { email, password } = req.body;
         if (!(email && password)) {
@@ -52,7 +53,7 @@ userRoute.post("/login", async (req, res) => {
             }
           );
           user.token = token;
-          res.status(200).json(user);
+          res.status(200).json(user.token);
         }
         res.status(400).send("Invalid Credentials");
       } catch (err) {
