@@ -9,13 +9,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { UserRegisterPageComponent } from './components/user-register-page/user-register-page.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     UserRegisterPageComponent,
-    UserPageComponent
+    UserPageComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,

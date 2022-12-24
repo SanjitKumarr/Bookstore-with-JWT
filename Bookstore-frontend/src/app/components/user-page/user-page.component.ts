@@ -8,6 +8,7 @@ import { BookCrudService } from 'src/app/services/book-crud.service';
 })
 export class UserPageComponent implements OnInit {
   Books:any=[];
+  searchValue:string = '';
 
   constructor(private bookCrudService: BookCrudService) { }
   
