@@ -1,8 +1,11 @@
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand">BookStore</a>
-    <form class="form-inline">
+    <form class="form-inline" *ngIf="!isLoggedIn">
       <button routerLink="/login" class="btn btn-outline-success my-2 my-sm-0" type="submit">Log In</button>
       <button routerLink="/register" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign Up</button>
+    </form>
+    <form class="form-inline" *ngIf="isLoggedIn">
+      <button routerLink="/login" class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="signOut()">Sign OUt</button>
     </form>
 </nav>
 <router-outlet></router-outlet>

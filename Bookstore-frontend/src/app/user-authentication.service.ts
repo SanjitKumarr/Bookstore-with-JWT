@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthenticationService {
   api = 'http://localhost:5000/api';
-
+  isUserAuthenticated = new BehaviorSubject(false);
   constructor(private httpClient:HttpClient) { }
   
   login(data:any):Observable<any> {

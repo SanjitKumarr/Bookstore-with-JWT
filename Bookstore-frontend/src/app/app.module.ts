@@ -8,12 +8,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { UserRegisterPageComponent } from './user-register-page/user-register-page.component';
+import { UserPageComponent } from './user-page/user-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    UserRegisterPageComponent
+    UserRegisterPageComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,

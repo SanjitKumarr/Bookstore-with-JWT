@@ -28,9 +28,10 @@ export class LoginPageComponent implements OnInit {
     this.userAuthenticationService.login(this.loginForm.value).subscribe((res:any)=>{
       console.log(res);
       this.message = '';
-      // this.ngZone.run(()=>{
-      //   this.router.navigateByUrl('/bookList')
-      // })
+      this.userAuthenticationService.isUserAuthenticated.next(true);
+      this.ngZone.run(()=>{
+        this.router.navigateByUrl('/user-page');
+      })
     },error=>{
       if(error.error === 'Invalid Credentials'){
         this.message = 'User Doesnot Exist';
