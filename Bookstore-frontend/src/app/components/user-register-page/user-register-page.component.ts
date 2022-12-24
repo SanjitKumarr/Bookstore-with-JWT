@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserAuthenticationService } from '../user-authentication.service';
+import { UserAuthenticationService } from 'src/app/services/user-authentication.service';
 
 @Component({
   selector: 'app-user-register-page',

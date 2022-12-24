@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth/auth.guard';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { UserPageComponent } from './user-page/user-page.component';
-import { UserRegisterPageComponent } from './user-register-page/user-register-page.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { UserPageComponent } from './components/user-page/user-page.component';
+import { UserRegisterPageComponent } from './components/user-register-page/user-register-page.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full' },

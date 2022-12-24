@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookCrudService } from 'src/app/services/book-crud.service';
 
 @Component({
   selector: 'app-user-page',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-page.component.scss']
 })
 export class UserPageComponent implements OnInit {
+  Books:any=[];
 
-  constructor() { }
-
+  constructor(private bookCrudService: BookCrudService) { }
+  
   ngOnInit(): void {
+    this.bookCrudService.getBooks().subscribe(res => {
+      console.log(res);
+      this.Books=res;
+    });
   }
 
 }

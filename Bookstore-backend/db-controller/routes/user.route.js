@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 let User = require('../models/users');
+let Book = require('../models/books');
 const auth = require("../../middleware/auth");
 
 //adding User router
@@ -71,9 +72,21 @@ userRoute.route('/addUser').post((req, res, next) => {
     });
 });
 
-//get all User route
+//adding book router
+
+userRoute.route('/addBook').post((req, res, next) => {
+    Book.create(req.body, (error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.json(data);
+        }
+    });
+});
+
+//get all book route
 userRoute.route('/').get((req, res, next) => {
-    User.find((error, data) => {
+    Book.find((error, data) => {
         if (error) {
             return next(error);
         } else {
@@ -82,9 +95,9 @@ userRoute.route('/').get((req, res, next) => {
     });
 });
 
-//get User by id router
-userRoute.route('/readUser/:id').get((req, res, next) => {
-    User.findById(req.params.id, (error, data) => {
+//get Book by id router
+userRoute.route('/readBook/:id').get((req, res, next) => {
+    Book.findById(req.params.id, (error, data) => {
         if (error) {
             return next(error);
         } else {
@@ -95,8 +108,8 @@ userRoute.route('/readUser/:id').get((req, res, next) => {
 
 
 
-userRoute.route('/updateUser/:id').put((req, res, next) => {
-    User.findByIdAndUpdate(req.params.id, {
+userRoute.route('/updateBook/:id').put((req, res, next) => {
+    Book.findByIdAndUpdate(req.params.id, {
         $set: req - body
     }, (error, data) => {
         if (error) {
@@ -109,8 +122,8 @@ userRoute.route('/updateUser/:id').put((req, res, next) => {
 });
 
 
-userRoute.route('/deleteUser/:id').delete((req, res, next) => {
-    User.findByIdAndRemove(req.params.id, (error, data) => {
+userRoute.route('/deleteBook/:id').delete((req, res, next) => {
+    Book.findByIdAndRemove(req.params.id, (error, data) => {
         if (error) {
             return next(error);
         } else {
@@ -121,4 +134,5 @@ userRoute.route('/deleteUser/:id').delete((req, res, next) => {
     });
 });
 
+// module.exports = bookRoute
 module.exports = userRoute
