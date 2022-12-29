@@ -1,9 +1,32 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
+const path = require('path');
+const mongoose = require('mongoose');
+const cors= require('cors');
+const bodyParser = require('body-parser');
+const mongoDb=require('./dataBase-connection/db');
 
-const app = express();
 
+mongoose.Promise = global.Promise;
+mongoose.connect(mongoDb.db,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(()=>{
+    console.log('Database Connected succesfully');
+}).catch((error)=>{
+    console.log("got an error :"+error);
+});
+
+const userRoute= require('./db-controller/routes/user.route');
+const app=express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended:false }));
+app.use(cors());
+
+app.use(express.static(path.join(__dirname,'Users')));
+
+app.use('/api',userRoute);
 dotenv.config();
 
 let PORT = process.env.PORT || 3000;

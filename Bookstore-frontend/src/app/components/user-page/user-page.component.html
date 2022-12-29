@@ -1,0 +1,21 @@
+<div class="form-group row">
+    <label for="search" class="col-sm-2 col-form-label" style="margin-left:370px; margin-right:-200px">Search</label>
+    <div class="col-sm-6">
+        <input type="text" [(ngModel)]="searchValue" class="form-control" id="search" placeholder="Search by Book's name or Author's name">
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        
+        <div class="card col-md-3 shadow-lg p-3 mb-5 bg-body rounded" *ngFor="let book of Books| searchFilter:searchValue,let i=index">
+            <img src="{{book.image}}">
+            <h5 style="white-space: nowrap; overflow: hidden;text-overflow:ellipsis;">{{book.name}}</h5>
+            <p>Author: {{book.author}}</p>
+            <p>{{book.price | currency:'INR'}}</p>
+            <p>{{book.language}}</p>
+            <p>{{book.description}}</p>
+            <button class="btn btn-primary">Add to Cart</button>
+        </div>
+    </div>
+</div>
