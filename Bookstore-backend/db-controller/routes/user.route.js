@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 
 let User = require('../models/users');
 let Book = require('../models/books');
+let Cart = require('../models/cart');
 const auth = require("../../middleware/auth");
 
 //adding User router
@@ -130,6 +131,21 @@ userRoute.route('/deleteBook/:id').delete((req, res, next) => {
             res.status(200).json({
                 msg: data
             })
+        }
+    });
+});
+
+userRoute.route('/addToCart').post((req, res, next) => {
+    console.log(req.body.userId);
+    let userId= req.body.userId;
+    let bookId= req.body.bookId;
+    Cart.updateOne({userId: userId},{$push : {userCart:{bookId:bookId}}},(error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.status(200).json({
+                msg: data
+            }) 
         }
     });
 });
