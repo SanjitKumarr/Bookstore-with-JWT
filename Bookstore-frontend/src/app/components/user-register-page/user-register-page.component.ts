@@ -28,7 +28,7 @@ export class UserRegisterPageComponent implements OnInit {
   onSubmit(): void {
     this.userAuthenticationService.register(this.registerForm.value).subscribe((res:any)=>{
       console.log(res);
-      this.message = '';
+      this.message = 'User Registerd. Please login';
       // this.ngZone.run(()=>{
       //   this.router.navigateByUrl('/bookList')
       // })

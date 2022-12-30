@@ -29,6 +29,7 @@ export class LoginPageComponent implements OnInit {
       console.log(res);
       this.message = '';
       this.userAuthenticationService.isUserAuthenticated.next(true);
+      this.userAuthenticationService.accessToken.next(res);
       this.ngZone.run(()=>{
         this.router.navigateByUrl('/user-page');
       })
