@@ -9,6 +9,7 @@ export class UserAuthenticationService {
   api = 'http://localhost:5000/api';
   isUserAuthenticated = new BehaviorSubject(false);
   accessToken = new BehaviorSubject('');
+  currentUserId = '';
 
   constructor(private httpClient:HttpClient) { }
   

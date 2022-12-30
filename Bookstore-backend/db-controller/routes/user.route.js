@@ -55,7 +55,7 @@ userRoute.post("/login",async (req, res) => {
             }
           );
           user.token = token;
-          res.status(200).json(user.token);
+          res.status(200).json({ userId:user._id, accessToken:user.token });
         }
         res.status(400).send("Invalid Credentials");
       } catch (err) {
