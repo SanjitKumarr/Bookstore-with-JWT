@@ -16,5 +16,9 @@ export class CartService {
     return this.httpClient.post(url, data);
   }
 
+  getCart(data:any):Observable<any> {
+    let url=`${this.api}/getUserCart`;
+    return this.httpClient.post(url, data);
+  }
 
 }

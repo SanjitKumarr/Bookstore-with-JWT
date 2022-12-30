@@ -150,5 +150,17 @@ userRoute.route('/addToCart').post((req, res, next) => {
     });
 });
 
+userRoute.route('/getUserCart').post((req, res, next) => {
+    console.log(req.body.userId);
+    let userId= req.body.userId;
+    Cart.find({userId : userId}, (error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.json(data);
+        }
+    });
+});
+
 // module.exports = bookRoute
 module.exports = userRoute

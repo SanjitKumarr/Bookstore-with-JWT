@@ -19,6 +19,7 @@ export class UserPageComponent implements OnInit {
     this.bookCrudService.getBooks().subscribe(res => {
       console.log(res);
       this.Books=res;
+      this.bookCrudService.currentlyAvailableBook = res;
     });
   }
 

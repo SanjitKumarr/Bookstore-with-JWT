@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BookCrudService } from './services/book-crud.service';
+import { CartService } from './services/cart.service';
 import { UserAuthenticationService } from './services/user-authentication.service';
 
 @Component({
@@ -9,7 +12,9 @@ import { UserAuthenticationService } from './services/user-authentication.servic
 export class AppComponent implements OnInit{
   title = 'Bookstore-frontend';
   isLoggedIn = false;
-  constructor(private userAuthenticationService:UserAuthenticationService){
+  constructor(private userAuthenticationService:UserAuthenticationService,
+    private cartService:CartService,private bookCrudService:BookCrudService,
+    private router:Router, private ngZone:NgZone,){
   }
   ngOnInit():void {
     this.userAuthenticationService.isUserAuthenticated.subscribe((data) => {
@@ -20,6 +25,19 @@ export class AppComponent implements OnInit{
   signOut(){
     this.isLoggedIn = false;
     this.userAuthenticationService.isUserAuthenticated.next(false);
+  }
+
+  async getUserCart(){
+    let reqBodyData = {
+      userId: this.userAuthenticationService.currentUserId
+    }
+    await this.cartService.getCart(reqBodyData).subscribe((data) => {
+      console.log(data);
+      this.bookCrudService.currentUserCart = data[0].userCart;
+      this.ngZone.run(()=>{
+        this.router.navigateByUrl('/cart');
+      })
+    })
   }
 
 }
