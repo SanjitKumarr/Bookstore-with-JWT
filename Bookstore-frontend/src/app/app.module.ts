@@ -10,6 +10,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { UserRegisterPageComponent } from './components/user-register-page/user-register-page.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { UserCartComponent } from './components/user-cart/user-cart.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
     LoginPageComponent,
     UserRegisterPageComponent,
     UserPageComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    UserCartComponent
   ],
   imports: [
     BrowserModule,
