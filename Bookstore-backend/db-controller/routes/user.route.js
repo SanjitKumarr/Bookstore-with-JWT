@@ -162,5 +162,16 @@ userRoute.route('/getUserCart').post((req, res, next) => {
     });
 });
 
+userRoute.route('/clearUserCart').delete((req, res, next) => {
+    let userId= req.body.userId;
+    Cart.deleteOne({userId : userId}, (error, data) => {
+        if(error) {
+            return next(error);
+        }else {
+            res.json(data);
+        }
+    })
+})
+
 // module.exports = bookRoute
 module.exports = userRoute
