@@ -1,4 +1,5 @@
     <div class="card-table">
+        <button type="button" class="btn btn-warning back-button" routerLink="/user-page">&lt; Back</button>
         <div class="cart-product">
             <table class="table table-resposive">
                <thead>
@@ -27,7 +28,7 @@
         </div>
     </div>
     <button class="btn btn-primary" style=" margin:0 auto;display:block; margin-bottom:15px;"> Proceed To Pay </button>
-    <button type="button"  class="btn btn-danger"  style="margin:0 auto;display:block">
+    <button type="button"  class="btn btn-danger"  style="margin:0 auto;display:block" (click)="clearCart()">
         Clear your cart
       </button>
 

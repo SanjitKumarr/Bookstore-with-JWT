@@ -135,10 +135,14 @@ userRoute.route('/deleteBook/:id').delete((req, res, next) => {
     });
 });
 
-userRoute.route('/addToCart').post((req, res, next) => {
+ userRoute.route('/addToCart').post(async (req, res, next) => {
     console.log(req.body.userId);
     let userId= req.body.userId;
     let bookId= req.body.bookId;
+    let existingCart = await Cart.find({userId: userId});
+    if(existingCart.length === 0){
+        await Cart.create({userId: userId});
+    }
     Cart.updateOne({userId: userId},{$push : {userCart:{bookId:bookId}}},(error, data) => {
         if (error) {
             return next(error);
@@ -168,7 +172,9 @@ userRoute.route('/clearUserCart').delete((req, res, next) => {
         if(error) {
             return next(error);
         }else {
-            res.json(data);
+            res.status(200).json({
+                msg: data
+            }) 
         }
     })
 })

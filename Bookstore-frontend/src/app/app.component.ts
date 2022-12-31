@@ -33,7 +33,11 @@ export class AppComponent implements OnInit{
     }
     await this.cartService.getCart(reqBodyData).subscribe((data) => {
       console.log(data);
-      this.bookCrudService.currentUserCart = data[0].userCart;
+      if(data && data.length > 0 && data[0].userCart){
+        this.bookCrudService.currentUserCart = data[0].userCart;
+      }else {
+        this.bookCrudService.currentUserCart = [];
+      }
       this.ngZone.run(()=>{
         this.router.navigateByUrl('/cart');
       })

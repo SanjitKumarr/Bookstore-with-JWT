@@ -21,4 +21,12 @@ export class CartService {
     return this.httpClient.post(url, data);
   }
 
+  clearUserCart(data:any):Observable<any> {
+    let url=`${this.api}/clearUserCart`;
+    let option = {
+      body : data
+    }
+    return this.httpClient.delete(url,option);
+  }
+
 }
