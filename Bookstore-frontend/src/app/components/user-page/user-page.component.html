@@ -15,7 +15,7 @@
             <p>{{book.price | currency:'INR'}}</p>
             <p>{{book.language}}</p>
             <p>{{book.description}}</p>
-            <button class="btn btn-primary">Add to Cart</button>
+            <button class="btn btn-primary" (click)="addToCart(book)">Add to Cart</button>
         </div>
     </div>
 </div>

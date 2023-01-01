@@ -26,9 +26,11 @@ export class LoginPageComponent implements OnInit {
   
   onSubmit(): void {
     this.userAuthenticationService.login(this.loginForm.value).subscribe((res:any)=>{
-      console.log(res);
       this.message = '';
       this.userAuthenticationService.isUserAuthenticated.next(true);
+      this.userAuthenticationService.accessToken.next(res.accessToken);
+      this.userAuthenticationService.currentUserId = res.userId;
+      console.log(res.accessToken);
       this.ngZone.run(()=>{
         this.router.navigateByUrl('/user-page');
       })

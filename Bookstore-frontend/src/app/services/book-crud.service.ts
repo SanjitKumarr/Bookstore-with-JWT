@@ -10,6 +10,9 @@ import { catchError,map } from 'rxjs/operators';
 export class BookCrudService {
   api:string = 'http://localhost:5000/api';
   httpHeaders:HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+  currentlyAvailableBook:any = [];
+  currentUserCart:any = [];
+
   constructor(private httpClient:HttpClient) { }
 
   addBook(data:Book):Observable<any> {
