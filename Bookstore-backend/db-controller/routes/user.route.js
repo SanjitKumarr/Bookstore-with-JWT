@@ -63,7 +63,7 @@ userRoute.post("/login",async (req, res) => {
       }
 });
 
-userRoute.route('/addUser').post((req, res, next) => {
+userRoute.route('/addUser').post(auth,(req, res, next) => {
     User.create(req.body, (error, data) => {
         if (error) {
             return next(error);
@@ -75,7 +75,7 @@ userRoute.route('/addUser').post((req, res, next) => {
 
 //adding book router
 
-userRoute.route('/addBook').post((req, res, next) => {
+userRoute.route('/addBook').post(auth,(req, res, next) => {
     Book.create(req.body, (error, data) => {
         if (error) {
             return next(error);
@@ -86,7 +86,7 @@ userRoute.route('/addBook').post((req, res, next) => {
 });
 
 //get all book route
-userRoute.route('/').get((req, res, next) => {
+userRoute.route('/').get(auth,(req, res, next) => {
     Book.find((error, data) => {
         if (error) {
             return next(error);
@@ -97,7 +97,7 @@ userRoute.route('/').get((req, res, next) => {
 });
 
 //get Book by id router
-userRoute.route('/readBook/:id').get((req, res, next) => {
+userRoute.route('/readBook/:id').get(auth,(req, res, next) => {
     Book.findById(req.params.id, (error, data) => {
         if (error) {
             return next(error);
@@ -109,7 +109,7 @@ userRoute.route('/readBook/:id').get((req, res, next) => {
 
 
 
-userRoute.route('/updateBook/:id').put((req, res, next) => {
+userRoute.route('/updateBook/:id').put(auth,(req, res, next) => {
     Book.findByIdAndUpdate(req.params.id, {
         $set: req - body
     }, (error, data) => {
@@ -123,7 +123,7 @@ userRoute.route('/updateBook/:id').put((req, res, next) => {
 });
 
 
-userRoute.route('/deleteBook/:id').delete((req, res, next) => {
+userRoute.route('/deleteBook/:id').delete(auth,(req, res, next) => {
     Book.findByIdAndRemove(req.params.id, (error, data) => {
         if (error) {
             return next(error);
@@ -135,7 +135,7 @@ userRoute.route('/deleteBook/:id').delete((req, res, next) => {
     });
 });
 
- userRoute.route('/addToCart').post(async (req, res, next) => {
+ userRoute.route('/addToCart').post(auth,async (req, res, next) => {
     console.log(req.body.userId);
     let userId= req.body.userId;
     let bookId= req.body.bookId;
@@ -154,19 +154,18 @@ userRoute.route('/deleteBook/:id').delete((req, res, next) => {
     });
 });
 
-userRoute.route('/getUserCart').post((req, res, next) => {
-    console.log(req.body.userId);
+userRoute.route('/getUserCart').post(auth,(req, res, next) => {
     let userId= req.body.userId;
     Cart.find({userId : userId}, (error, data) => {
         if (error) {
             return next(error);
         } else {
-            res.json(data);
+            res.status(200).json(data);
         }
     });
 });
 
-userRoute.route('/clearUserCart').delete((req, res, next) => {
+userRoute.route('/clearUserCart').delete(auth,(req, res, next) => {
     let userId= req.body.userId;
     Cart.deleteOne({userId : userId}, (error, data) => {
         if(error) {

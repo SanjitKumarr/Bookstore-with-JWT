@@ -1,28 +1,29 @@
+<div class="container" *ngIf="cartBookDetail.length != 0">
     <div class="card-table">
         <button type="button" class="btn btn-warning back-button" routerLink="/user-page">&lt; Back</button>
         <div class="cart-product">
             <table class="table table-resposive">
-               <thead>
-                   <tr>
-                       <th>Book</th>
-                       <th>Title</th>
-                       <th>Author</th>
-                       <th>Price</th>
-                       <th>Language</th>
-                   </tr>
-               </thead> 
-               <tbody>
-                   <tr *ngFor="let book of cartBookDetail;let i=index">
-                       <td><img src="{{book.image}}" alt="" style="height:60px; width:40px" ></td>
-                       <td>{{book.name}}</td>
-                       <td>{{book.author}}</td>
-                       <td>{{book.price | currency:'INR'}}</td>
-                       <td>{{book.language}}</td>
-                   </tr>
-                   <!-- <tr>
-                       <h5>Cart Total is : {{cartTotal | currency:'INR'}}</h5>
-                   </tr> -->
-               </tbody>
+                <thead>
+                    <tr>
+                        <th>Book</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Price</th>
+                        <th>Language</th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    <tr *ngFor="let book of cartBookDetail;let i=index">
+                        <td><img src="{{book.image}}" alt="" style="height:60px; width:40px" ></td>
+                        <td>{{book.name}}</td>
+                        <td>{{book.author}}</td>
+                        <td>{{book.price | currency:'INR'}}</td>
+                        <td>{{book.language}}</td>
+                    </tr>
+                    <!-- <tr>
+                        <h5>Cart Total is : {{cartTotal | currency:'INR'}}</h5>
+                    </tr> -->
+                </tbody>
             </table>
 
         </div>
@@ -30,17 +31,17 @@
     <button class="btn btn-primary" style=" margin:0 auto;display:block; margin-bottom:15px;"> Proceed To Pay </button>
     <button type="button"  class="btn btn-danger"  style="margin:0 auto;display:block" (click)="clearCart()">
         Clear your cart
-      </button>
+    </button>
+</div>
 
-<!-- 
-    <div class="container">
-        <div class="card">
-            <h5 class="card-title">My Cart</h5>
-        </div>
-        <div class="center">
-            <img id="second" src="https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" alt="">
-            <h4>Your cart is empty</h4>
-            <h6>Add the book you love to the cart</h6>
-            <button class="btn btn-primary" routerLink="/user-page" type="button">Shop Now</button>
-        </div>
-    </div> -->
+<div class="container" *ngIf="cartBookDetail.length === 0">
+    <div class="card">
+        <h5 class="card-title">My Cart</h5>
+    </div>
+    <div class="center">
+        <img id="second" src="https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" alt="">
+        <h4>Your cart is empty</h4>
+        <h6>Add the book you love to the cart</h6>
+        <button class="btn btn-primary" routerLink="/user-page" type="button">Shop Now</button>
+    </div>
+</div>
