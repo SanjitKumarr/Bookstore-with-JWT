@@ -8,6 +8,64 @@ let Book = require('../models/books');
 let Cart = require('../models/cart');
 const auth = require("../../middleware/auth");
 
+var request = require('request');
+
+// const postData = JSON.stringify({
+//     seriesid: ['LAUCN040010000000005']
+//   });
+// const options = {
+//   hostname: 'https://api.bls.gov/publicAPI/v2/timeseries/data/',
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json',
+//     'Content-Length': Buffer.byteLength(postData),
+//   },
+// };
+
+// const getPosts = () => {
+//   let data = '';
+
+//   const request = http.request(options, (response) => {
+//     // Set the encoding, so we don't get log to the console a bunch of gibberish binary data
+//     response.setEncoding('utf8');
+
+//     // As data starts streaming in, add each chunk to "data"
+//     response.on('data', (chunk) => {
+//       data += chunk;
+//     });
+
+//     // The whole response has been received. Print out the result.
+//     response.on('end', () => {
+//       console.log(data);
+//     });
+//   });
+
+//   // Log errors if any occur
+//   request.on('error', (error) => {
+//     console.error(error);
+//   });
+//   request.write(postData);
+
+//   // End the request
+//   request.end();
+// };
+
+userRoute.get("/bls",async (req,res) => {
+    // getPosts();
+    var myJSONObject = {
+        seriesid: ['LAUCN040010000000005']
+    };
+    await request({
+        url: "https://api.bls.gov/publicAPI/v2/timeseries/data/",
+        method: "POST",
+        json: true,   // <--Very important!!!
+        body: myJSONObject
+        }, function (error, response, body){
+            console.log(response.body);
+            res.json(response.body);
+    });
+    // res.json('hi');
+})
 //adding User router
 userRoute.post("/register",async (req, res) => {
     try{
